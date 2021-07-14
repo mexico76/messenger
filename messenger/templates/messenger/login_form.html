@@ -1,0 +1,11 @@
+{% extends "mainfile.html" %}
+
+{%  block content %}
+    {% if not user.is_authenticated %}
+    {% load bootstrap4 %}
+    {% bootstrap_alert 'Please login' alert_type='info' %}
+   {% include 'messenger/includes/login_form.html' %}
+    {% else %}
+     <p>You are allredy loged in like {{ user }}!</p>
+    {% endif %}
+{% endblock %}

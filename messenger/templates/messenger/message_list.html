@@ -1,0 +1,43 @@
+{% extends 'mainfile.html' %}
+
+{% block content %}
+    {% load bootstrap4 %}
+    {% load static %}
+    <h6>Send message from {{ sender.get_full_name }} to {{ receiver.get_full_name }}</h6>
+<div class="overflow-auto rounded border p-2" style="max-height: 300px">
+    {% for message in previos_messages %}
+        {% if message.sender == sender %}
+            <div class="message-row" >
+            <div class="d-flex align-items-center">
+            <div class="message-content bg-secondary rounded p-1">
+                    {{ message.message_text }}<br>
+                    {{ message.date_time}}
+            </div>
+            </div>
+            </div><br>
+            <br>
+        {% else %}
+            <div class="message-row">
+            <div class="d-flex align-items-center justify-content-end">
+            <div class="message-content bg-primary text-white rounded p-1">
+                    {{ message.message_text }}<br>
+                    {{ message.date_time}}
+            </div>
+            </div>
+            </div><br>
+        {% endif %}
+    {% endfor %}
+</div>
+
+    <br>
+    <div class="row">
+    <div class="col-sm-9">
+    <form action="{% url 'send_message' receiver %}" method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_form message_form size='small' layout='inline' %}
+    {% bootstrap_button "Send" button_type="submit" button_class="btn-primary" size='small' %}
+            <a href="{% url 'send_message' receiver %}" class="btn btn-success btn-sm">Refresh</a>
+    </form>
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends "mainfile.html" %}
+{% load bootstrap4 %}
+
+{%  block content %}
+    {% bootstrap_alert 'Uncorrect login/password' alert_type='warning' %}
+    {% include 'messenger/includes/login_form.html' %}
+{%  endblock %}

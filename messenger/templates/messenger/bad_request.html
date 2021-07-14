@@ -1,0 +1,7 @@
+{% extends "mainfile.html" %}
+
+{%  block begin %}
+    <p>Bad request</p>
+    <p>{{ error_message.args }} {{ method }} {{ valid_form }}</p>
+    {% include 'messenger/includes/reg_form.html' %}
+{%  endblock %}
